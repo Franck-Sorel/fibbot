@@ -1,0 +1,76 @@
+name: Minimal Action Implementation
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches:
+      - main
+jobs:
+  fibonacci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable #specifies a the latest rust version to install
+
+      - name: Build the project
+        run: cargo build --release
+
+      - name: Scan PR for numbers and calculate Fibonacci
+
+        id: scan
+
+        run: |
+
+          # Get the PR body
+
+          PR_BODY=$(jq -r .pull_request.body "$GITHUB_EVENT_PATH")
+
+
+
+          # Extract numbers from the PR body
+
+          NUMBERS=$(echo "$PR_BODY" | grep -o -E '[0-9]+' | tr '\n' ' ')
+
+
+
+          # Set parameters
+
+          ENABLE_FIBONACCI=${{ github.event.inputs.enable_fibonacci }}
+
+          THRESHOLD=${{ github.event.inputs.threshold }}
+
+
+          # Run the Rust binary
+
+          echo "$NUMBERS" | ./target/release/your_fibonacci_binary $ENABLE_FIBONACCI $THRESHOLD > results.txt
+
+
+          # Read results
+
+          RESULTS=$(cat results.txt)
+
+
+          # Set output for the next step
+
+          echo "::set-output name=results::$RESULTS"
+
+      - name: Post results as a comment
+
+        if: steps.scan.outputs.results != ''
+
+        run: |
+
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+
+          -H "Accept: application/vnd.github.v3+json" \
+
+          https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+
+          -d "{\"body\": \"Fibonacci Results:\n\`\`\`\n${{ steps.scan.outputs.results }}\n\`\`\`\"}"
