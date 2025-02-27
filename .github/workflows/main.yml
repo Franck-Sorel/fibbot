@@ -42,7 +42,7 @@ jobs:
 
           # Set parameters
 
-          ENABLE_FIBONACCI=${{ github.event.inputs.enable_fibonacci }}
+          ENABLE_FIBONACCI=${{ github.event.inputs.enable_fibbot }}
 
           THRESHOLD=${{ github.event.inputs.threshold }}
 
