@@ -3,10 +3,20 @@ name: Minimal Action Implementation
 on:
   pull_request:
     types: [opened, synchronize]
+    inputs:
+      enable:
+        description: a flag to enable Fibonacci calculation
+        required: true
+        default: 'true'
+      limit:
+        description: a threshold limit
+        required: true
+        default: '100'
   push:
     branches:
       - test
       - master
+
 jobs:
   fibonacci:
     runs-on: ubuntu-latest
@@ -18,64 +28,40 @@ jobs:
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable #specifies a the latest rust version to install
+          toolchain: stable #specifies the latest rust version to install
 
       - name: Build the project
         run: cargo build --release
 
       - name: Run the bot
-        run: ./target/release/fibbot ${{ github.even.inputs.input1 }} ${{ github.even.inputs.input2 }} > results.txt
+        run: ./target/release/fibonacci_number ${{ github.event.inputs.enable }} ${{ github.event.inputs.limit }}
 
+      - name: Scan PR for numbers and calculate Fibonacci
+        id: scan
+        run: |
+          # Get the PR body
+          PR_BODY=$(jq -r .pull_request.body "$GITHUB_EVENT_PATH")
 
-      # - name: Scan PR for numbers and calculate Fibonacci
+          # Extract numbers from the PR body
+          NUMBERS=$(echo "$PR_BODY" | grep -o -E '[0-9]+' | tr '\n' ' ')
 
-      #   id: scan
+          # Set parameters
+          ENABLE_FIBONACCI=${{ github.event.inputs.enable }}
+          THRESHOLD=${{ github.event.inputs.limit }}
 
-      #   run: |
+          # Run the Rust binary
+          echo "$NUMBERS" | ./target/release/fibonacci_number $ENABLE_FIBONACCI $THRESHOLD > results.txt
 
-      #     # Get the PR body
+          # Read results
+          RESULTS=$(cat results.txt)
 
-      #     PR_BODY=$(jq -r .pull_request.body "$GITHUB_EVENT_PATH")
+          # Set output for the next step
+          echo "::set-output name=results::$RESULTS"
 
-
-
-      #     # Extract numbers from the PR body
-
-      #     NUMBERS=$(echo "$PR_BODY" | grep -o -E '[0-9]+' | tr '\n' ' ')
-
-
-
-      #     # Set parameters
-
-      #     ENABLE_FIBONACCI=${{ github.event.inputs.enable_fibbot }}
-
-      #     THRESHOLD=${{ github.event.inputs.threshold }}
-
-
-      #     # Run the Rust binary
-
-      #     echo "$NUMBERS" | ./target/release/your_fibonacci_binary $ENABLE_FIBONACCI $THRESHOLD > results.txt
-
-
-      #     # Read results
-
-      #     RESULTS=$(cat results.txt)
-
-
-      #     # Set output for the next step
-
-      #     echo "::set-output name=results::$RESULTS"
-
-      # - name: Post results as a comment
-
-      #   if: steps.scan.outputs.results != ''
-
-      #   run: |
-
-      #     curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-
-      #     -H "Accept: application/vnd.github.v3+json" \
-
-      #     https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
-
-      #     -d "{\"body\": \"Fibonacci Results:\n\`\`\`\n${{ steps.scan.outputs.results }}\n\`\`\`\"}"
+      - name: Post results as a comment
+        if: steps.scan.outputs.results != ''
+        run: |
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+          -d "{\"body\": \"Fibonacci Results:\n\`\`\`\n${{ steps.scan.outputs.results }}\n\`\`\`\"}"
