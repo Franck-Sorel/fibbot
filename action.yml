@@ -18,4 +18,4 @@ runs:
   steps:
     - name: Run Rust program
       run: |
-        cargo run --release --${{ inputs.enable }} ${{ inputs.limit }}
+        cargo run --release 
