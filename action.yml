@@ -12,9 +12,10 @@ on:
         description: a threshold limit
         required: true
         default: '100'
-# runs:
-#   using: "composite"
-#   steps:
-#     - name: Run Rust program
-#       run: |
-#         cargo run --release --${{ inputs.input1 }} ${{ inputs.input2 }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run Rust program
+      run: |
+        cargo run --release --${{ inputs.enable }} ${{ inputs.limit }}
