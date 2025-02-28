@@ -1,6 +1,6 @@
 pub fn collect(text: &str ) -> Vec<u128> {
 
-        let text = "Here are some numbers: 42, 12345678901234567890, and -7, but not 3.14 or 0.";
+        // let text = "Here are some numbers: 42, 12345678901234567890, and -7, but not 3.14 or 0.";
         let mut numbers: Vec<u128> = Vec::new();
         let mut current_number = String::new();
     
