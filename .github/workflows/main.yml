@@ -24,7 +24,7 @@ jobs:
         run: cargo build --release
 
       - name: Run the bot
-        run: ./target/release/fibonacci_number ${{ github.even.inputs.input1 }} ${{ github.even.inputs.input2 }} > results.txt
+        run: ./target/release/fibonacci_number ${{ inputs.enable }} ${{ inputs.limit }} > results.txt
 
 
       # - name: Scan PR for numbers and calculate Fibonacci
