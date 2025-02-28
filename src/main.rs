@@ -13,7 +13,8 @@ fn main() {
 
     let text = match text {
         Ok(string) => string,
-        Err(_) => std::process::exit(1),
+        Err(_) => { eprintln!("Unable to read the pull request content as string");
+        std::process::exit(1); }
     };
 
     let text = text.as_str();
