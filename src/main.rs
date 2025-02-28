@@ -1,4 +1,3 @@
-
 fn main() {
 
     let boool = true;
@@ -12,14 +11,12 @@ fn main() {
     let text = read_pull_request::read_pull();
     let content = text.expect("error taking the pull request content as sting");
     
-    
+    let pr_number = 1 as u128;
 
-    let content = content.as_str();
-    let vector = extract_number::collect(content, limit);
+    let _content = content.as_str();
 
-    for element in vector {
-        println!("The fib_number is: {}", fib_number::fib_number(element));
-    }
+   let _content = get_from_pull_request::get_pull_request(pr_number, limit);
+
 }
 
 mod extract_number;
