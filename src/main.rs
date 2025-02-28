@@ -16,7 +16,11 @@ async fn main() {
 
     let _content = content.as_str();
 
-   let _content = get_from_pull_request::get_pull_request(pr_number, limit).await;
+   let content = get_from_pull_request::get_pull_request(pr_number, limit).await;
+
+   for i in 0.. {
+    println!("Fibonacci {}, is : {}", content[i], fib_number::fib_number(content[i]))
+   }
 
 }
 
