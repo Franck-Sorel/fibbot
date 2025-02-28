@@ -1,4 +1,5 @@
-fn main() {
+#[tokio::main]
+async fn main() {
 
     let boool = true;
     if !boool {
@@ -15,7 +16,7 @@ fn main() {
 
     let _content = content.as_str();
 
-   let _content = get_from_pull_request::get_pull_request(pr_number, limit);
+   let _content = get_from_pull_request::get_pull_request(pr_number, limit).await;
 
 }
 
