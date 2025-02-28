@@ -1,14 +1,17 @@
 name: rust-fibbot-action
 description: GitHub Action in Rust that scans pull request content for numbers, calculates their Fibonacci numbers, and posts a comment with the results
-inputs:
-  input1:
-    description: a flag to enable Fibonacci calculation
-    required: true
-    default: 'true'
-  input2:
-    description: a threshold limit
-    required: true
-    default: '100'
+
+on:
+  workflow_dispatch:
+    inputs:
+      enable:
+        description: a flag to enable Fibonacci calculation
+        required: true
+        default: 'true'
+      limit:
+        description: a threshold limit
+        required: true
+        default: '100'
 # runs:
 #   using: "composite"
 #   steps:
