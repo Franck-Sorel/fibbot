@@ -5,7 +5,8 @@ on:
     types: [opened, synchronize]
   push:
     branches:
-      - main
+      - test
+      - master
 jobs:
   fibonacci:
     runs-on: ubuntu-latest
