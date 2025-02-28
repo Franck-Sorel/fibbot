@@ -3,15 +3,15 @@ use std::env;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    // Check if the amount of arguments does not exceed 3.
-    if args.len() > 3 {
-        eprintln!("Usage: {} <input_string> <input_integer>", args[0]);
+    // Check if the amount of arguments is exactly 3 (program name + 2 arguments)
+    if args.len() != 3 {
+        eprintln!("Usage: {} <enable> <limit>", args[0]);
         std::process::exit(1);
     }
 
     // bot trigger
     let boool = args[1].parse::<bool>().expect("Err: Bad bool input");
-    if boool == false {
+    if !boool {
         return;
     }
     
@@ -20,7 +20,6 @@ fn main() {
         .trim()
         .parse()
         .expect("Enter an integer as argument two");
-
 
     // Pull request content as String
     let text = read_pull_request::read_pull();
@@ -34,7 +33,7 @@ fn main() {
     let vector = extract_number::collect(text, input);
 
     for element in vector {
-        println!("The fib_number is: {}", fib_number::fib_number(element))
+        println!("The fib_number is: {}", fib_number::fib_number(element));
     }
 }
 

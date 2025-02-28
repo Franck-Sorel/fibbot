@@ -1,10 +1,9 @@
 use std::env;
 
-use reqwest::{blocking::Client, Error};
+use reqwest::blocking::Client;
 use serde::Deserialize;
 #[derive(Deserialize, Debug)]
 struct PullRequest {
-    title: String,
     body: String,
 
 }
