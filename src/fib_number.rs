@@ -1,6 +1,6 @@
-pub fn fib_number(input: u128) -> u128 {
+pub fn fib_number(input: u128 ) -> u128 {
     
-
+    
     
     let mut prev: u128 = 0;
     let mut next: u128 = 1;

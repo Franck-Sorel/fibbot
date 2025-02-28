@@ -2,34 +2,40 @@ use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    
-    if args.len() > 3 {
 
+    // Check if the amount of arguments does not exceed 3.
+    if args.len() > 3 {
         eprintln!("Usage: {} <input_string> <input_integer>", args[0]);
         std::process::exit(1);
- 
     }
 
-    // set the traceholders
-    let input: u32 = args[2]
+    // bot trigger
+    let boool = args[1].parse::<bool>().expect("Err: Bad bool input");
+    if boool == false {
+        return;
+    }
+    
+    // threshold limit argument
+    let input: u128 = args[2]
         .trim()
         .parse()
         .expect("Enter an integer as argument two");
 
+
+    // Pull request content as String
     let text = read_pull_request::read_pull();
-    
+
     let text = match text {
         Ok(string) => string,
         Err(_) => std::process::exit(1),
     };
 
     let text = text.as_str();
-    let vector = extract_number::collect(text);
+    let vector = extract_number::collect(text, input);
 
     for element in vector {
         println!("The fib_number is: {}", fib_number::fib_number(element))
     }
-
 }
 
 mod extract_number;
