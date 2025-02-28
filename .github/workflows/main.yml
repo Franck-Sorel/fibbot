@@ -35,32 +35,6 @@ jobs:
 
       - name: Run the bot
         run: ./target/release/fibonacci_number ${{ github.event.inputs.enable }} ${{ github.event.inputs.limit }}
-
-      - name: Scan PR for numbers and calculate Fibonacci
-        id: scan
-        run: |
-          # Get the PR body
-          PR_BODY=$(jq -r .pull_request.body "$GITHUB_EVENT_PATH")
-
-          # Extract numbers from the PR body
-          NUMBERS=$(echo "$PR_BODY" | grep -o -E '[0-9]+' | tr '\n' ' ')
-
-          # Set parameters
-          ENABLE_FIBONACCI=${{ github.event.inputs.enable }}
-          THRESHOLD=${{ github.event.inputs.limit }}
-
-          # Run the Rust binary
-          echo "$NUMBERS" | ./target/release/fibonacci_number $ENABLE_FIBONACCI $THRESHOLD > results.txt
-
-          # Read results
-          RESULTS=$(cat results.txt)
-
-          # Set output for the next step
-          echo "::set-output name=results::$RESULTS"
-
-      - name: Post results as a comment
-        if: steps.scan.outputs.results != ''
-        run: |
           curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
