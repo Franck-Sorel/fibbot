@@ -21,9 +21,10 @@ jobs:
         with:
           toolchain: stable #specifies the latest rust version to install
 
-      - name: Build the project
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: | 
-              cargo build --release
-              cargo run 
+      - name: Run FibBot
+        uses: Franck-Sorel/fibbot@main
+        with:
+          pr_number: ${{ github.event.pull_request.number }}
+          enable_fib: "true"
+          max_threshold: "100"
+          github_token: ${{ secrets.GITHUB_TOKEN }}  
