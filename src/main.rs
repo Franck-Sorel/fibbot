@@ -4,10 +4,10 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     // Check if the amount of arguments is exactly 3 (program name + 2 arguments)
-    if args.len() != 3 {
-        eprintln!("Usage: {} <enable> <limit>", args[0]);
-        std::process::exit(1);
-    }
+    // if args.len() != 3 {
+    //     eprintln!("Usage: {} <enable> <limit>", args[0]);
+    //     std::process::exit(1);
+    // }
 
     // bot trigger
     let boool = args[1].parse::<bool>().expect("Err: Bad bool input");
