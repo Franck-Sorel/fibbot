@@ -2,8 +2,11 @@ use std::env;
 
 use reqwest::blocking::Client;
 use serde::Deserialize;
+
+
 #[derive(Deserialize, Debug)]
 struct PullRequest {
+    title: String,
     body: String,
 
 }
@@ -26,19 +29,14 @@ pub fn read_pull() -> Result<String, reqwest::Error> {
         
     };
 
-    let response = client.get(&pull_request_url)
-        .header("User-Agent", "foo")
+    let response = client
+        .get(&pull_request_url)
         .header("Authorization", format!("token {}", token))
-        .header("Accept", "application/vnd.github+json")
-        .send()?;
-
+        .header("Accept", "application/vnd.github.v3+json")
+        .send()?
+        .json::<PullRequest>()?;
+    Ok(format!("Title: {}\nBody: {}", response.title, response.body))
     
-        if response.status().is_success() {
-            let pr: PullRequest = response.json()?;
-            Ok(pr.body)
-        } else {
-            Err(reqwest::Error::from(response.error_for_status().unwrap_err()))
-        }
     
 
     
