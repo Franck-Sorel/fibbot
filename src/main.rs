@@ -1,3 +1,5 @@
+
+
 #[tokio::main]
 async fn main() {
 
@@ -21,10 +23,20 @@ async fn main() {
    for i in 0.. {
     println!("Fibonacci {}, is : {}", content[i], fib_number::fib_number(content[i]))
    }
+//    let mut response =
+//         String::from("#### Fibonacci output of each number in the pull_request is:\n");
+//     for &num in &pr_number {
+//         let fib = fibonacci(num);
+//         response.push_str(&format!("- Fibonacci({}) = {}\n", num, fib));
+//     }
 
+//    if let Err(e) = post_comment(&response).await {
+//     eprintln!("Error posting comment: {}", e);
+// }
 }
 
 mod extract_number;
 mod fib_number;
 mod read_pull_request;
 mod get_from_pull_request;
+mod add_comment;

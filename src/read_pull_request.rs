@@ -1,6 +1,6 @@
 use std::env;
 
-use reqwest::blocking::Client;
+use reqwest::Client;
 use serde::Deserialize;
 
 
@@ -33,8 +33,8 @@ pub async fn read_pull() -> Result<String, reqwest::Error> {
         .get(&pull_request_url)
         .header("Authorization", format!("token {}", token))
         .header("Accept", "application/vnd.github.v3+json")
-        .send()?
-        .json::<PullRequest>()?;
+        .send().await?
+        .json::<PullRequest>().await?;
     Ok(format!("Title: {}\nBody: {}", response.title, response.body))
     
     
