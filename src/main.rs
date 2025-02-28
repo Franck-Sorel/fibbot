@@ -10,7 +10,7 @@ async fn main() {
 
     // Pull request content as String
     let text = read_pull_request::read_pull();
-    let content = text.expect("error taking the pull request content as sting");
+    let content = text.await.expect("error taking the pull request content as sting");
     
     let pr_number = 1 as u128;
 

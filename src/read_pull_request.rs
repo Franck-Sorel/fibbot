@@ -12,7 +12,7 @@ struct PullRequest {
 }
 
 
-pub fn read_pull() -> Result<String, reqwest::Error> {
+pub async fn read_pull() -> Result<String, reqwest::Error> {
     let client = Client::new();
 
     let pull_request_number = 1;
