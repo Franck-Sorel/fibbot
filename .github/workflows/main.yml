@@ -1,5 +1,4 @@
 name: Minimal Action Implementation
-
 on:
   pull_request:
     types: [opened, synchronize]
