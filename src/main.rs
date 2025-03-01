@@ -23,7 +23,7 @@ async fn main() {
    let content = get_from_pull_request::get_pull_request(pr_number, limit).await;
 
    for i in &content {
-    println!("Fibonacci {}, is : {}", i, fib_number::fib_number(*i);
+    println!("Fibonacci {}, is : {}", i, fib_number::fib_number(*i));
    }
    let mut response =
         String::from("## YOUR FIBONACCI :\n");
