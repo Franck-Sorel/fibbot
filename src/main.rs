@@ -17,12 +17,12 @@ async fn main() {
     .parse::<u128>()
     .expect("Invalid PR_NUMBER");
 
-    // Pull request content as String
-    
-    
-    let pr_number = 1 as u128;
+    let limit = env::var("TRESHOLD")
+    .expect("THRESHOLD not set")
+    .parse::<u128>()
+    .expect("Invalid THRESHOLD");
 
-    
+    // Pull request content as String    
 
    let content = get_from_pull_request::get_pull_request(pr_number, limit).await;
 
