@@ -21,7 +21,8 @@ jobs:
         uses: Franck-Sorel/fibbot@master
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          TRESHOLD: ${{ secrets.LIMIT }}
+          PR_NUMBER: ${{ secrets.PR_NUMBER }}
+          
         with:
-          pr_number: ${{ github.event.pull_request.number }}
           enable_fib: "true"
-          max_threshold: "100"
