@@ -27,6 +27,7 @@ runs:
     - name: Run FibBot
       run: |
         export PR_NUMBER="${{ inputs.pr_number }}"
-        export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN  }}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         cargo run "${{ inputs.enable_fib }}" "${{ inputs.max_threshold }}"
       shell: bash
