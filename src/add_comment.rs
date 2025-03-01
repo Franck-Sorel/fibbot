@@ -4,10 +4,11 @@ use std::env;
 pub async fn post_comment(pr_content: &str) -> Result<(), reqwest::Error> {
     let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
     println!("REPO: {}", repo);
-    let pr_number = env::var("PR_NUMBER")
-        .expect("PR_NUMBER not set")
-        .parse::<u32>()
-        .expect("Invalid PR_NUMBER");
+    let pr_number = 1 as u32;
+    // let pr_number = env::var("PR_NUMBER")
+    //     .expect("PR_NUMBER not set")
+    //     .parse::<u32>()
+    //     .expect("Invalid PR_NUMBER");
     println!("PR_NUMBER: {:?}", pr_number);
     let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
     println!("GITHUB_TOKEN: {:?}", github_token);
