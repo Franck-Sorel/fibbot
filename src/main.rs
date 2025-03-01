@@ -39,6 +39,5 @@ async fn main() {
 
 mod extract_number;
 mod fib_number;
-mod read_pull_request;
 mod get_from_pull_request;
 mod add_comment;
