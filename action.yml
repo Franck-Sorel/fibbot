@@ -27,7 +27,10 @@ runs:
     - name: Run FibBot
       run: |
         export PR_NUMBER="${{ inputs.pr_number }}"
+        export LIMIT="${{ inputs.max_threshold }}"
         cargo run "${{ inputs.enable_fib }}" "${{ inputs.max_threshold }}"
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
+        PR_NUMBER: ${{ inputs.number }}
+        LIMIT: ${{ inputs.max_threshold }}
       shell: bash
