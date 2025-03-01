@@ -7,14 +7,15 @@ pub async fn post_comment(pr_content: &str) -> Result<(), reqwest::Error> {
         .expect("PR_NUMBER not set")
         .parse::<u32>()
         .expect("Invalid PR_NUMBER");
-
+    println!("PR_NUMBER: {}", pr_number);
     let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
-
+    println!("GITHUB_TOKEN: {:?}", github_token);
     let url = format!(
         "https://api.github.com/repos/{}/issues/{}/comments",
         repo, pr_number
     );
 
+    println!("URL: {}", url);
     let client = Client::new();
     let response = client
         .post(&url)
@@ -24,6 +25,7 @@ pub async fn post_comment(pr_content: &str) -> Result<(), reqwest::Error> {
         .json(&serde_json::json!({ "body": pr_content }))
         .send()
         .await?;
+    println!("RESPONSE: {}", response);
 
     if response.status().is_success() {
         println!("✅ Comment posted successfully.");
