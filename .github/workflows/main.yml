@@ -1,12 +1,22 @@
 name: Minimal Action Implementation
 on:
-  pull_request:
-    types: [opened, synchronize]
   push:
+  pull_request_target:
+    types: [opened, synchronize]
+permissions:
+  pull-requests: write
+  contents: read
+  issues: write
+  
+  
 
 jobs:
   fibonacci:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
 
     steps:
       - name: Checkout repository
