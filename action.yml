@@ -31,6 +31,6 @@ runs:
         cargo run "${{ inputs.enable_fib }}" "${{ inputs.max_threshold }}"
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
-        PR_NUMBER: ${{ inputs.number }}
+        PR_NUMBER: ${{ inputs.pr_number }}
         LIMIT: ${{ inputs.max_threshold }}
       shell: bash
