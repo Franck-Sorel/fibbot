@@ -22,11 +22,11 @@ async fn main() {
 
    let content = get_from_pull_request::get_pull_request(pr_number, limit).await;
 
-   for i in 0.. {
-    println!("Fibonacci {}, is : {}", content[i], fib_number::fib_number(content[i]))
+   for i in &content {
+    println!("Fibonacci {}, is : {}", i, fib_number::fib_number(i);
    }
    let mut response =
-        String::from("#### Fibonacci output of each number in the pull_request is:\n");
+        String::from("## YOUR FIBONACCI :\n");
     for &num in &content {
         let fib = fib_number(num);
         response.push_str(&format!("- Fibonacci({}) = {}\n", num, fib));
