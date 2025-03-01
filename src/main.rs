@@ -17,6 +17,8 @@ async fn main() {
     .parse::<u128>()
     .expect("Invalid PR_NUMBER");
 
+    println!("PR_number: {:?}", pr_number);
+    
     let limit = env::var("TRESHOLD")
     .expect("THRESHOLD not set")
     .parse::<u128>()
