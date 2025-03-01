@@ -4,7 +4,7 @@
   This FibBot project scans pull request content for numbers, calculates their Fibonacci numbers, and posts a comment with the results.
 
 ## Features: 
-  - 🚀 Only usefull dependencies.
+  - 🚀 Only usefull dependencies. 
   - 🌍 Re-usable in any github projects.
   - 🛠️ Based Code Writing in Rust Programming language.
 
