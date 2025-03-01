@@ -1,5 +1,6 @@
 use add_comment::post_comment;
 use fib_number::fib_number;
+use std::env;
 
 
 
@@ -11,7 +12,10 @@ async fn main() {
         return;
     }
 
-    let limit = 100 as u128;
+    let pr_number = env::var("PR_NUMBER")
+    .expect("PR_NUMBER not set")
+    .parse::<u128>()
+    .expect("Invalid PR_NUMBER");
 
     // Pull request content as String
     
