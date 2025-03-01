@@ -21,7 +21,7 @@ jobs:
         uses: Franck-Sorel/fibbot@master
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          TRESHOLD: ${{ secrets.LIMIT }}
+          LIMIT: ${{ secrets.LIMIT }}
           PR_NUMBER: ${{ secrets.PR_NUMBER }}
           
         with:
