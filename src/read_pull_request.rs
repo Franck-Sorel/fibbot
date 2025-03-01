@@ -18,7 +18,7 @@ pub async fn read_pull() -> Result<String, reqwest::Error> {
     let pull_request_number = 1;
 
     let owner_repo = env::var("GITHUB_REPOSITORY").expect("Bad Repo");
-    let pull_request_url = format!("https://api.github.com/repos/{owner_repo}/pulls/{pull_request_number}");
+    let pull_request_url = format!("https://api.github.com/repos/{owner_repo}/pulls/{pull_request_number}/files");
 
     let token = match env::var("GH_TOKEN") {
         Ok(token) => token,
