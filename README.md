@@ -133,3 +133,5 @@ __fib_number.rs__ Calculate the fibonacci of a  number.
 __get_from_pull_request.rs__ In this one, we access the pull request content and take it as real text to after using it for fetch numbers.
 
 __main:__ For the implementation of all those files.
+
+1 and 7
