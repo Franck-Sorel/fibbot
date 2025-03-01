@@ -11,11 +11,12 @@ async fn main() {
     if !boool {
         return;
     }
+    let pr_number = 1 as u128;
 
-    let pr_number = env::var("PR_NUMBER")
-    .expect("PR_NUMBER not set")
-    .parse::<u128>()
-    .expect("Invalid PR_NUMBER");
+    // let pr_number = env::var("PR_NUMBER")
+    // .expect("PR_NUMBER not set")
+    // .parse::<u128>()
+    // .expect("Invalid PR_NUMBER");
 
     println!("PR_number: {:?}", pr_number);
     
