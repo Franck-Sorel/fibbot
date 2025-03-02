@@ -32,4 +32,5 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         LIMIT: ${{ inputs.max_threshold }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
       shell: bash
