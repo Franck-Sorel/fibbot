@@ -11,7 +11,7 @@ pub async fn post_comment(pr_content: &str) -> Result<(), reqwest::Error> {
         .expect("Invalid PR_NUMBER");
     
     println!("PR_NUMBER: {:?}", pr_number);
-    let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
+    let github_token = env::var("GH_TOKEN").expect("GITHUB_TOKEN not set");
     println!("GITHUB_TOKEN: {:?}", github_token);
     let url = format!(
         "https://api.github.com/repos/{}/issues/{}/comments",
