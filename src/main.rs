@@ -29,7 +29,7 @@ async fn main() {
     .parse::<u128>()
     .expect("Invalid THRESHOLD");
 
-    Pull request content as String    
+    
 
    let content = get_from_pull_request::get_pull_request(pr_number, limit).await;
 
