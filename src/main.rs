@@ -11,11 +11,12 @@ async fn main() {
     if !enable_fib {
         return;
     }
-    // let limit: u128 = args
-    //     .get(2)
-    //     .unwrap_or(&"100".to_string())
-    //     .parse()
-    //     .unwrap_or(100);
+    
+    let limit: u128 = args
+        .get(2)
+        .unwrap_or(&"100".to_string())
+        .parse()
+        .unwrap_or(100);
 
     let pr_number = env::var("PR_NUMBER")
     .expect("PR_NUMBER not set")
@@ -24,10 +25,10 @@ async fn main() {
 
     println!("PR_number: {:?}", pr_number);
     
-    let limit = env::var("TRESHOLD")
-    .expect("THRESHOLD not set")
-    .parse::<u128>()
-    .expect("Invalid THRESHOLD");
+    // let limit = env::var("TRESHOLD")
+    // .expect("THRESHOLD not set")
+    // .parse::<u128>()
+    // .expect("Invalid THRESHOLD");
 
     
 
