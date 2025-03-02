@@ -37,4 +37,5 @@ jobs:
           
         with:
           enable_fib: "true"
+          pr_number: ${{ github.event.pull_request.number }}
         
