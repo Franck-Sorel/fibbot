@@ -32,7 +32,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
           LIMIT: ${{ secrets.LIMIT }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          
           
         with:
           enable_fib: "true"
