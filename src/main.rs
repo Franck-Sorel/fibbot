@@ -29,13 +29,14 @@ async fn main() {
     .parse::<u128>()
     .expect("Invalid THRESHOLD");
 
-    Pull request content as String    
+       
 
    let content = get_from_pull_request::get_pull_request(pr_number, limit).await;
 
    for i in &content {
     println!("Fibonacci {}, is : {}", i, fib_number::fib_number(*i));
    }
+
    let mut response =
         String::from("## YOUR FIBONACCI :\n");
     for &num in &content {
@@ -46,6 +47,7 @@ async fn main() {
    if let Err(e) = post_comment(&response).await {
     eprintln!("Error posting comment: {}", e);
 }
+
 }
 
 mod extract_number;
